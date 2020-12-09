@@ -10,7 +10,7 @@ export function handleBid(event: Bid): void {
   let entity = Depo.load(event.transaction.from.toHex())
   if (entity == null) {
     entity = new Depo(event.transaction.from.toHex())
-    entity.count = entity.count + BigInt.fromI32(0)
+    entity.count = BigInt.fromI32(0)
   }
   
   entity.count = entity.count + BigInt.fromI32(1)
