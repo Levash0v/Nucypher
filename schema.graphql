@@ -1,0 +1,13 @@
+type Depo @entity {
+  id: ID!
+  count: BigInt!
+  sender: Bytes! # address
+  depositedETH: BigInt! # uint256
+}
+
+type CancelDepo @entity {
+  id: ID!
+  count: BigInt!
+  sender: Bytes! # address
+  value: BigInt! # uint256
+}

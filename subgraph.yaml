@@ -1,0 +1,51 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Worklock
+    network: mainnet
+    source:
+      address: "0xe9778E69a961e64d3cdBB34CF6778281d34667c2"
+      abi: Worklock
+      startBlock: 10763629
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Bid
+        - BiddersChecked
+        - Canceled
+        - Claimed
+        - CompensationWithdrawn
+        - Deposited
+        - ForceRefund
+        - OwnershipTransferred
+        - Refund
+        - Shutdown
+      abis:
+        - name: Worklock
+          file: ./abis/Worklock.json
+      eventHandlers:
+        - event: Bid(indexed address,uint256)
+          handler: handleBid
+        - event: BiddersChecked(indexed address,uint256,uint256)
+          handler: handleBiddersChecked
+        - event: Canceled(indexed address,uint256)
+          handler: handleCanceled
+        - event: Claimed(indexed address,uint256)
+          handler: handleClaimed
+        - event: CompensationWithdrawn(indexed address,uint256)
+          handler: handleCompensationWithdrawn
+        - event: Deposited(indexed address,uint256)
+          handler: handleDeposited
+        - event: ForceRefund(indexed address,indexed address,uint256)
+          handler: handleForceRefund
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Refund(indexed address,uint256,uint256)
+          handler: handleRefund
+        - event: Shutdown(indexed address)
+          handler: handleShutdown
+      file: ./src/mapping.ts
